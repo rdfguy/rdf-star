@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset=UTF-8>
+    <meta content="width=device-width" name="viewport">
+    <title>RDF-star / RDF 1.2</title>
+    <link rel="stylesheet" href="../Templates/slides.css">
+    <!-- To use the b6+ framework, include this: -->
+    <script src="../Templates/b6plus.js"></script>
+    <!-- To use the Shower framework, remove b6plus above and add these two: -->
+    <!--   <script src="../Templates/shower.js"></script>         -->
+    <!--   <script src="../Templates/iframe-fixup.js"></script>   -->
+</head>
+<body class="shower fade-in duration=15">
+<!-- What a screen reader should say on leaving slide mode,
+     instead of the default ‘Stopped.’ -->
+<div role=region aria-live=assertive>
+    Leaving slide mode.
+</div>
+
+<section class="slide cover clear">
+    <h1>RDF-star / RDF 1.2</h1>
+    <address>W3C RDF-star WG</address>
+    <h3>Co-chairs:</h3>
+    <p>Ora Lassila (AWS)</p>
+    <p>Adrian Gschwend (Zazuko)</p>
+    <hr>
+    <p>TPAC 2024<br>
+        Anaheim CA, USA<br>
+        hybrid meeting<br>
+        23–27 SEPTEMBER 2024</p>
+</section>
+
+<section class="slide">
+    <h2>RDF timeline</h2>
+    <table class="striped">
+        <tbody>
+        <tr><th>May 1997</th><td>First version of the PICS-NG proposal</td></tr>
+        <tr><th>October 1997</th><td>First public “working draft” of something called RDF</td></tr>
+        <tr><th>February 1999</th><td>RDF “Model and Syntax”</td></tr>
+        <tr><th>February 2004</th><td>RDF “Model and Syntax” revised (“RDF 1.0”)</td></tr>
+        <tr><th>January 2008</th><td>SPARQL 1.0</td></tr>
+        <tr><th>March 2013</th><td>SPARQL 1.1</td></tr>
+        <tr><th>February 2014</th><td>RDF 1.1</td></tr>
+        <tr><th>December 2021</th><td>RDF-star CG final report</td></tr>
+        <tr><th>August 2022</th><td>RDF-star WG formed</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="slide">
+    <h2>Statements about statements</h2>
+    <p>Up until now done by “modeling” RDF statements in RDF</p>
+    <p>Reification: cumbersome, misunderstood, unpopular</p>
+    <ul>
+        <li>one of the most persistent criticisms of RDF, particularly when comparing to Labeled Property Graphs (LPGs)</li>
+        <li>could be seen as the RDF counterpart of Labeled Property Graph “edge properties” (RDF is more expressive, though)</li>
+    </ul>
+    <p>Over the years, many ideas and proposals on how to fix this</p>
+    <ul>
+        <li>most notably, “Reification Done Right” by Hartig & Thompson in 2014</li>
+        <li>RDR eventually parlayed into “RDF-Star”, first a CG, now a WG</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Some use cases</h2>
+    <p>Provenance</p>
+    <p>Qualifying statements</p>
+    <p>“Marginalia”</p>
+    <p>Modalities (beliefs, etc.)</p>
+    <p>Also: bringing RDF closer to LPGs (aka “alignment”)</p>
+</section>
+
+<section class="slide">
+    <h2>Challenges</h2>
+    <p>Triples in an RDF graph are unique (remember: set semantics)</p>
+    <p><pre>:ElizabethTaylor :married :RichardBurton</pre></p>
+    <ul>
+        <li>we want to qualify this with a year</li>
+        <li>but... Taylor married Burton twice (1964 and 1975)</li>
+    </ul>
+    <p>Breaking existing RDF (1.1) semantics is highly undesirable</p>
+    <p>Introducing new semantics could have consequences for RDFS & OWL</p>
+    <p>Relationship between statements and named graphs?</p>
+    <ul>
+        <li>is a reified statement a singleton named graph?</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Semantics proposal</h2>
+    <p>We have extended the RDF 1.1 semantics with “triple terms”</p>
+    <ul>
+        <li>triples are formed using IRIs, blank nodes, literals, and triple terms</li>
+        <li>an occurrence of a triple is identified by a reifying resource (aka a “reifier”) related to a triple term</li>
+    </ul>
+    <p>We have agreed on a minimal baseline as a means of comparing proposals</p>
+    <ul>
+        <li>we introduce minimal semantics and semantics for the well-formed fragment of RDF (we call this “RDF semantics”)</li>
+    </ul>
+    <p>We have two alternate, extended baselines we are still discussing</p>
+    <ul>
+        <li>these essentially differ in how a reifier is related to triple terms</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Syntax proposal</h2>
+    <p>We extend Turtle with some “syntactic sugar”:</p>
+    <p>Occurrence syntax (or "unasserted syntax", still debating this):  <pre><< :s :p :o ~ :id >> :pp :oo</pre></p>
+    <p>Annotation syntax:  <pre>:s :p :o {| :pp :oo |}</pre></p>
+    <p>“Triple term” syntax (only for internal use):  <pre><<(:s :p :o)>></pre></p>
+    <p>(Niklas Lindström will get into the details in the next presentation.)</p>
+</section>
+
+<section class="slide">
+    <h2>Current status</h2>
+    <p>It took us a long time to agree on the “big picture” (but we now have more or less reached consensus within the WG)</p>
+    <p>RDF 1.1 semantics has been extended (this was the really important part)</p>
+    <p>We have lots of documents that now need to all be updated (essentially all RDF and SPARQL specs)</p>
+    <p>“RDF-Star” name will go away and we get “RDF 1.2” and “SPARQL 1.2”</p>
+</section>
+
+</body>
+</html>
